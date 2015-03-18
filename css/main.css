@@ -311,6 +311,7 @@ li.item-parent span.not-selected {
 
 /** Calendar columns -------------------------------------------------------------------- */
 .small-multiples {
+    border-right: 1px solid #DDD;
 }
 
 /** hide columns when no space is available */
@@ -341,11 +342,8 @@ li.item-parent span.not-selected {
     border-right: 1px solid #eee;
     border-top: 1px solid #ddd;
     background-color: white;
+    vertical-align: top;
     visibility: hidden;
-}
-
-.cal-wrapper:last-of-type {
-    border-right: 1px solid #ddd;
 }
 
 .cal-wrapper.has-data {
