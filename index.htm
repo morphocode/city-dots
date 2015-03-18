@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8' />
+        <title>Data Canvas</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script src="lib/moment.js" charset="utf-8"></script>
+        <script src="lib/moment-timezone-with-data.js" charset="utf-8"></script>
+        <script src="lib/cal-heatmap/cal-heatmap.js" charset="utf-8"></script>
+        <link href='lib/cal-heatmap/cal-heatmap.css' rel='stylesheet' />
+
+        <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+        <style>
+            body {
+                font-family: "Lato", "Helvetica Neue",Helvetica,Arial,sans-serif;
+                background: #f3f3f3;
+            }
+
+            [metric="none"] .q1, [metric="none"] .q2, [metric="none"] .q3, [metric="none"] .q4, [metric="none"] .q5, [metric="none"] .q6, [metric="none"] .q7 {
+                background-color: #eee;
+                fill: #eee;
+            }
+
+            [metric="humidity"] .q1 {
+                background-color: #ffffb2;
+                fill: #ffffb2;
+            }
+            [metric="humidity"] .q2 {
+                background-color: #fed976;
+                fill: #fed976;
+            }
+            [metric="humidity"] .q3 {
+                background-color: #feb24c;
+                fill: #feb24c;
+            }
+            [metric="humidity"] .q4 {
+                background-color: #fd8d3c;
+                fill: #fd8d3c;
+            }
+            [metric="humidity"] .q5 {
+                background-color: #fc4e2a;
+                fill: #fc4e2a;
+            }
+            [metric="humidity"] .q6 {
+                background-color: #e31a1c;
+                fill: #e31a1c;
+            }
+            [metric="humidity"] .q7 {
+                background-color: #b10026;
+                fill: #b10026;
+            }
+
+            [metric="light"] .q1 {
+                background-color: #0c2c84;
+                fill: #0c2c84;
+            }
+            [metric="light"] .q2 {
+                background-color: #225ea8;
+                fill: #225ea8;
+            }
+            [metric="light"] .q3 {
+                background-color: #1d91c0;
+                fill: #1d91c0;
+            }
+            [metric="light"] .q4 {
+                background-color: #41b6c4;
+                fill: #41b6c4;
+            }
+            [metric="light"] .q5 {
+                background-color: #7fcdbb;
+                fill: #7fcdbb;
+            }
+            [metric="light"] .q6 {
+                background-color: #c7e9b4;
+                fill: #c7e9b4;
+            }
+            [metric="light"] .q7 {
+                background-color: rgb(255, 232, 170);
+                fill: rgb(255, 232, 170);
+            }
+
+
+            [metric="sound"] .q1 {
+                background: #bfd3e6;
+                fill: #bfd3e6;
+            }
+            [metric="sound"] .q2 {
+                background: #9ebcda;
+                fill: #9ebcda;
+            }
+            [metric="sound"] .q3 {
+                background: #8c96c6;
+                fill: #8c96c6;
+            }
+            [metric="sound"] .q4 {
+                background: #8c6bb1;
+                fill: #8c6bb1;
+            }
+            [metric="sound"] .q5 {
+                background: #88419d;
+                fill: #88419d;
+            }
+            [metric="sound"] .q6 {
+                background: #6e016b;
+                fill: #6e016b;
+            }
+
+
+
+            [metric="temperature"] .q1 {
+                background: rgb(12,44,132);
+                fill: rgb(12,44,132);
+            }
+            [metric="temperature"] .q2 {
+                background: rgb(34,94,168);
+                fill: rgb(34,94,168);
+            }
+            [metric="temperature"] .q3 {
+                background: rgb(29,145,192);
+                fill: rgb(29,145,192);
+            }
+            [metric="temperature"] .q4 {
+                background: rgb(65,182,196);
+                fill: rgb(65,182,196);
+            }
+            [metric="temperature"] .q5 {
+                background: rgb(127,205,187);
+                fill: rgb(127,205,187);
+            }
+            [metric="temperature"] .q6 {
+                background: rgb(245, 183, 171);
+                fill: rgb(245, 183, 171);
+            }
+            [metric="temperature"] .q7 {
+                background: rgb(238, 131, 110);
+                fill: rgb(238, 131, 110);
+            }
+            [metric="temperature"] .q8 {
+                background: rgb(232, 92, 65);
+                fill: rgb(232, 92, 65);
+            }
+            [metric="temperature"] .q9 {
+                background: rgb(219, 58, 27);
+                fill: rgb(219, 58, 27);
+            }
+
+            rect {
+                shape-rendering: auto;
+            }
+
+            .navbar {
+                background-color: #f3f3f3;
+                border-right: 1px solid #ddd;
+                border-bottom: 1px solid #ddd;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 40px;
+                min-height: 40px;
+                margin: 0;
+            }
+
+            /** Side Panels --------------------------------------------------------- */
+
+            .side-panel {
+                background-color: #444;
+                color:  #eee;
+                width: 200px;
+                position: fixed;
+                top:0;
+                bottom: 0;
+                left: 0;
+                /*overflow-y: auto;*/
+                z-index: 20;
+            }
+
+            .left-panel-icons {
+                display: none
+                left: 0;
+                padding-top: 40px;
+                width: 80px;
+            }
+
+            li.pane-option {
+                margin: 10px;
+            }
+
+            .left-panel-primary {
+                left: 0px;
+                border-left: 1px solid #333;
+            }
+
+            .left-panel-secondary {
+                left: 200px;
+                border-left: 1px solid #333;
+            }
+
+            .side-panel label {
+                background-color: #333;
+                border-bottom: 1px solid #666;
+                display: block;
+                padding: 10px;
+                text-transform: none;
+                margin-bottom: 0;
+            }
+
+            .side-panel .title {
+                background: #333;
+                color: #ccc;
+                padding: 10px 10px;
+                border-bottom: 1px solid #666;
+                text-transform: uppercase;
+                font-size: 10px;
+                font-weight: bold;
+            }
+
+            .side-panel ul {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .side-panel ul li {
+                border-bottom: 1px solid #666;
+                cursor: pointer;
+                color: #aaa;
+                padding: 5px 10px;
+                display: block;
+                position: relative;
+            }
+
+            .side-panel ul li.item-parent {
+                padding: 0;
+            }
+
+            .side-panel ul li.item-parent span {
+                border-bottom: 1px solid transparent;
+                display: block;
+                padding: 5px 10px;
+            }
+
+            .side-panel ul li.item-parent.expanded span {
+                border-bottom: 1px solid #666;
+            }
+
+            .side-panel .item-child ul li {
+                background-color: #555;
+            }
+
+            .side-panel .item-child ul li {
+                border-bottom: 1px solid #777;
+            }
+
+            li.item-parent span.not-selected {
+                font-style: italic;
+            }
+
+            .side-panel ul li.item-parent .item-child {
+                display: none;
+            }
+
+            .side-panel ul li.item-parent.expanded .item-child {
+                display: block;
+            }
+
+            .side-panel li:hover, .side-panel li.active {
+                color: #eee;
+            }
+
+            .left-panel-primary li.active:after {
+                width: 0px;
+                height: 0px;
+                border-style: solid;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent #ffffff transparent transparent;
+                position: absolute;
+                top: 50%;
+                right: 0;
+                margin-top: -10px;
+                content: "";
+            }
+
+            .left-panel-primary li.active.expanded:after {
+                top: 15px;
+            }
+
+            .legend-colors li, .legend-dot li {
+                vertical-align: top;
+                padding: 6px 10px;
+                cursor: default;
+                line-height: 16px;
+            }
+
+            .circle {
+                background: #eee;
+                border-radius: 8px;
+                margin-right: 10px;
+                width: 16px;
+                height: 16px;
+                display: inline-block;
+            }
+
+
+            .side-panel[data-viz-type="single-city"] .tab-dates {
+                display: none;
+            }
+
+            /** Calendar columns -------------------------------------------------------------------- */
+            .small-multiples {
+                position: absolute;
+                left: 200px;
+            }
+
+            .cal-wrapper {
+                border-right: 1px solid #eee;
+                float: left;
+                background-color: white;
+                display: none;
+            }
+
+            .cal-wrapper:last-of-type {
+                border-right: 1px solid #ddd;
+            }
+
+            .cal-wrapper.has-data {
+                display: block;
+            }
+
+            .cal-wrapper .secondary-label {
+                margin-top: 40px;
+                text-align: center;
+                text-transform: uppercase;
+                color: #999;
+                font-size: 10px;
+                padding: 10px;
+                border-bottom: 1px solid #f3f3f3;
+            }
+
+            .cal-wrapper .primary-label {
+                background-color: white;
+                border-right: 1px solid #ddd;
+                border-bottom: 1px solid #ddd;
+                height: 40px;
+                width: 157px;
+                position: fixed;
+                top: 0;
+                padding: 10px 0;
+                font-weight: bold;
+                display: block;
+                color: #666;
+                text-align: center;
+                z-index: 10;
+            }
+
+            .cal-wrapper .city-cal {
+                padding: 25px 25px;
+            }
+
+            .cal-heatmap-container .graph-label {
+                font-family: "Lato", "sans-serif";
+            }
+
+            .cal-heatmap-container {
+                width: 106px;
+            }
+
+
+        </style>
+
+        <script>
+
+            var cities = {
+                    'bangalore': {
+                        label: 'Bangalore'
+                    },
+                    'boston': {
+                        label: 'Boston'
+                    },
+                    'geneva': {
+                        label: 'Geneve'
+                    },
+                    'rio': {
+                        label: 'Rio de Janeiro'
+                    },
+                    'san-francisco': {
+                        label: 'San Francisco'
+                    },
+                    'shanghai': {
+                        label: 'Shanghai'
+                    },
+                    'singapore': {
+                        label: 'Singapore'
+                    }
+                },
+
+                // settings shared by all calendars
+                standardCalSettings = {
+                    domain : "day",
+                    domainGutter: 0, // controls the spacing between different days
+                    domainLabelFormat: "%e %b",
+                    colLimit: 4, // how many rows
+                    label: {
+                        align: "center",
+                        position: "bottom",
+                        width: 46
+                    },
+                    subDomain : "x_hour",
+                    /*subDomainTextFormat: "%H",/*function(date ,value) {
+                        //return value;
+                        return '%e';
+                    },*/
+                    subDomainTitleFormat: {
+                        empty: "No data",
+                        filled: "{count} {name} at {date}"
+                    },
+                    subDomainDateFormat: "%H h",
+                    cellSize: 16,
+                    cellRadius: 8,
+                    verticalOrientation: true,
+                    tooltip: true,
+                    displayLegend: false
+                },
+
+                // Settings for each of the Metrics: legend, unit type, color scale
+                metrics = {
+                    'humidity': {
+                        legend: [20.0, 30.0, 40.0, 50.0, 60.0, 70.0],
+                        itemName: ['%', '%'],
+                        legendTitle: 'Humidity',
+                        legendDescription: {
+                            "q1": "&lt; 20 %",
+                            "q2": "20 % — 30 %",
+                            "q3": "30 % — 40 %",
+                            "q4": "40 % — 50 %",
+                            "q5": "50 % — 60 %",
+                            "q6": "60 % — 70 %",
+                            "q7": "&gt; 70 %"
+                        }
+                    },
+                    'light': {
+                        legend: [1.5, 100.0, 800.0, 1000, 2000.0, 3000.0],
+                        itemName: ['Lux', 'Lux'],
+                        legendTitle: 'Light',
+                        legendDescription: {
+                            "q1": "Night sky",
+                            "q2": "Sunrise / Sunset",
+                            "q3": "Cloudy",
+                            "q4": "Overcast day",
+                            "q5": "Full daylight",
+                            "q6": "Direct sunlight"
+                        }
+                    },
+                    'sound': {
+                        legend: [1200.0, 1350.0, 1500.0, 1650.0, 1800.0],
+                        itemName: ["mV", "mV"],
+                        legendTitle: 'Noise',
+                        legendDescription: {
+                            "q1": "&lt; 1200 mV",
+                            "q2": "1200 mV — 1350 mV",
+                            "q3": "1350 mV — 1500 mV",
+                            "q4": "1500 mV — 1650 mV",
+                            "q5": "1650 mV — 1800 mV",
+                            "q6": "&gt; 1800 mV"
+                        }
+                    },
+                    'temperature': {
+                        legend: [0.0, 5.0, 10.0, 15.0, 20.0, 25.0, 30.0, 35.0],
+                        itemName: ["°C", "°C"],
+                        legendTitle: 'Temperature',
+                        legendDescription: {
+                            "q1": "&lt; 0 °C",
+                            "q2": "0 °C — 5 °C",
+                            "q3": "5 °C — 10 °C",
+                            "q4": "10 °C — 15 °C",
+                            "q5": "15 °C — 20 °C",
+                            "q6": "20 °C — 25 °C",
+                            "q7": "25 °C — 30 °C",
+                            "q8": "30 °C — 35 °C",
+                            "q9": "&gt; 35 °C"
+                        }
+                    }
+                },
+
+                calendars = {};
+
+
+
+            /**
+             * Builds a Calendar for each of the cities
+             */
+            function initCalendars(metric, year, month) {
+                var month = month || 2,
+                    year = year || 2015,
+                    counter = 0,
+                    vizType = currentVizType();
+
+                // hide calendars
+                $('.cal-wrapper').toggleClass('has-data', false);
+
+                switch (vizType) {
+                    case 'all-cities':
+                        for (var city in cities) {
+                            initCalendar('cal-'+counter, city, metric, year, month);
+                            counter++;
+                        }
+                        break;
+
+                    case 'single-city':
+                        var dates = [
+                            {year: 2015, month: 1},
+                            {year: 2015, month: 2},
+                            {year: 2015, month: 3}
+                        ];
+                        for (var i = 0; i < dates.length; i++) {
+                            var date = dates[i];
+                            initCalendar('cal-'+counter, currentCity(), metric, date.year, date.month);
+                            counter++;
+                        }
+                        break;
+
+                    case 'single-city-all':
+                        for (var metric in metrics) {
+                            initCalendar('cal-'+counter, currentCity(), metric, year, month);
+                            counter++;
+                        }
+                        break;
+
+                    default:
+                        throw new Error('Unsupported visualization type: ' + vizType);
+                }
+
+                // update the colors legend and the dates in the side panel
+                updateSidePanel(metric, year, month);
+
+            }
+
+            /**
+             * Builds a calendar for the specified city, metric and date.
+             * Note: we need to rebuild the calendar because the present updateData() of cal-heat doesn't handle range changes well
+             */
+            function initCalendar(id, city, metric, year, month) {
+
+                var month = month || 2,
+                    year = year || 2015,
+                    startDate = moment(year + '-' + month, 'YYYY-M'),
+                    customSettings = {
+                        start: startDate.toDate(),
+                        afterLoadData: buildParser(metric),
+                        data: startDate.format('YYYY-MM-') + city + '.json',
+                        itemName: metrics[metric].itemName,
+                        itemSelector : "#" + id + " .cal-placeholder",
+                        legend: metrics[metric].legend,
+                        range: startDate.daysInMonth(),
+                        afterLoad: function() {
+                            calElement.attr('metric', 'none');
+                            calElement.attr('city', 'none');
+                            calElement.toggleClass('has-data', true);
+                        },
+                        onComplete: function() {
+                            calElement.attr('metric', metric);
+                            calElement.attr('city', city);
+
+                            // reset dimensions
+                            $(customSettings.itemSelector).height('');
+                            $(customSettings.itemSelector).width('');
+                        }
+                    },
+                    cal = calendars[id],
+                    calElement = $('.cal-wrapper#'+id);
+
+
+                // use standard settings for base
+                $.extend(customSettings, standardCalSettings);
+
+                // destroy the calendar if existing
+                if (cal) {
+                    var _height = $(customSettings.itemSelector).height(),
+                        _width = $(customSettings.itemSelector).width();
+
+                    cal = cal.destroy();
+
+                    // we need to set height and width to prevent page flickering while rebuilding the DOM
+                    $(customSettings.itemSelector).html('');
+                    //$(customSettings.itemSelector).height(_height);
+                    //$(customSettings.itemSelector).width(_width);
+                }
+
+                calendars[id] = new CalHeatMap();
+                calendars[id].init(customSettings);
+
+                // update the corresponding DOM element
+                calElement.find('.primary-label').html(cities[city].label);
+                calElement.find('.secondary-label').html(startDate.format('MMM YYYY'));
+            }
+
+            /**
+             * Updates the side panel by showing the current date and metrics selected
+             */
+            function updateSidePanel(metric, year, month) {
+                // set the active legent element
+                $('ul.legend-colors').removeClass('active');
+                $('ul.legend-colors[data-metric=' + metric + ']').addClass('active');
+
+                // re-build the legend
+                $('.tab-metric-scale .title').html(metrics[metric].legendTitle + ' Scale');
+                $('ul.legend-colors').replaceWith(buildLegend(metric));
+
+            }
+
+            /**
+             *  Build the colors legend for the current metric
+             */
+            function buildLegend(metric) {
+                var legendHtml = '<ul class="legend-colors" metric="' + metric + '">',
+                    myMetricLegend = metrics[metric].legendDescription;
+
+                for (var qIndex in myMetricLegend) {
+                    if (myMetricLegend.hasOwnProperty(qIndex)) {
+                        legendHtml += '<li><span class="circle ' + qIndex + '"></span> ' + myMetricLegend[qIndex] + '</li>';
+                    }
+                }
+
+                legendHtml += '</ul>';
+
+                return legendHtml;
+            }
+
+
+            // http://sensor-api.localdata.com/api/v1/aggregations?op=mean&over.city=Shanghai&from=2015-02-01T00:00:00-0800&before=2015-03-01T00:00:00-0800&resolution=1h&fields=temperature,humidity,dust,light,airquality_raw,sound
+            /**
+             * Parse the DataCanvas API into the format expected by the Cal-Heat plug-in
+             */
+            var buildParser = function(metric) {
+                // this is the parser function
+                return function(data) {
+                    if (!data) {
+                        return {};
+                    }
+
+                    var stats = {};
+                    rawData = data['data'];
+                    for (var d in rawData) {
+                        var isoDate = rawData[d].timestamp;
+                        var utcMoment = moment.utc(isoDate);
+                        var city = rawData[d].city;
+
+                        // since Calendar Heat always shows the dates according to the current timezone,
+                        // we need to shift the timestamps so that the original time is preserved
+                        // i.e. when we see 17h - it means 17h local time in San Francisco
+                        var currentTzOffset = parseInt(moment().format('Z'));
+                        var dataTimezone = getTimezone(city);
+                        var dataTzOffset = parseInt(moment().tz(dataTimezone).format('Z'));
+
+                        var localMoment = utcMoment.add(dataTzOffset-currentTzOffset, 'hours');
+                        var timestamp = localMoment.unix();
+
+                        //var timestamp = Math.round((new Date(isoDate)).getTime() / 1000);
+
+                        var value = rawData[d][metric];
+                        // if the value is present, cut it to 2 digits after the floating point
+                        if (value != undefined) {
+                            value = parseFloat(value.toFixed(2));
+                        }
+                        stats[timestamp] = value;
+                    }
+                    //alert('data re-loaded');
+                    return stats;
+                }
+            };
+
+            /**
+             * http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+             * returns the timezone for the given city
+             */
+            function getTimezone(city) {
+                switch (city) {
+                    case 'Bangalore':
+                        return 'Asia/Kolkata';
+                    case 'Boston':
+                        return 'America/New_York';
+                    case 'Geneva':
+                        return 'Europe/Zurich';
+                    case 'Rio de Janeiro':
+                        return 'America/Sao_Paulo';
+                    case 'San Francisco':
+                        return 'America/Los_Angeles';
+                    case 'Shanghai':
+                        return 'Asia/Shanghai';
+                    case 'Singapore':
+                        return 'Asia/Singapore';
+
+                    default:
+                        throw new Error('Cannot determine timezone for city: ' + city);
+                }
+            }
+
+            /**
+             * setter/getter for the current metric
+             */
+            function currentMetric(metric) {
+                if (arguments.length) {
+                    $('.metrics li').removeClass('active');
+                    $('.metrics li[data-metric='+metric+']').addClass('active');
+                } else {
+                    return $(".metrics li.active").data('metric');
+                }
+            }
+
+            /**
+             * setter/getter for the current date
+             */
+            function currentDate(year, month) {
+                if (arguments.length) {
+                    $('ul.dates li').removeClass('active');
+                    $('ul.dates li[data-year='+year+'][data-month='+month+']').addClass('active');
+                } else {
+                    var $activeDate = $('.dates li.active');
+                    return {
+                        month: $activeDate.data('month'),
+                        year: $activeDate.data('year')
+                    };
+                }
+            }
+
+            /**
+             * setter/getter for the current visualization type
+             */
+            function currentVizType(vizType) {
+                if (arguments.length) {
+                    //$('.viz-types li[data-viz-type]').removeClass('active');
+                    //$('.viz-types li[data-viz-type='+vizType+']').addClass('active');
+                    $('.left-panel-primary').attr('data-viz-type', vizType);
+                } else {
+                    //return $(".viz-types li[data-viz-type].active").data('viz-type');
+                    return  $('.left-panel-primary').attr('data-viz-type');
+                }
+            }
+
+            /**
+             * setter/getter for the current city
+             */
+            function currentCity(city) {
+                if (arguments.length) {
+                    $('ul.cities li[data-city]').removeClass('active');
+                    $('ul.cities li[data-city='+city+']').addClass('active');
+                } else {
+                    return $("ul.cities li[data-city].active").data('city');
+                }
+            }
+
+
+            $(document).ready(function() {
+
+
+                currentMetric('sound');
+                currentDate(2015, 2);
+                currentVizType('all-cities');
+                initCalendars('sound', 2015, 2);
+
+                $(".metrics li").click(function(event) {
+                    var thisMetric = $(this).data('metric');
+                    currentMetric(thisMetric);
+
+                    updateCalendars();
+                });
+
+                $(".dates li").click(function(event) {
+                    var _year = $(this).data('year'),
+                        _month = $(this).data('month');
+                    currentDate(_year, _month);
+
+                    updateCalendars();
+                });
+
+
+                /*
+                $(".viz-types li[data-viz-type=all-cities]").click(function(event) {
+                    var _vizType = $(this).data('viz-type');
+                    currentVizType(_vizType);
+
+                    updateCalendars();
+                });*/
+
+                $('li.item-parent span').click(function(event) {
+                    $(this).parent().toggleClass('expanded');
+                });
+
+                $(".cities li").click(function(event) {
+                    var _city = $(this).data('city');
+                    if (_city == 'all') {
+                        currentVizType('all-cities');
+                        $(this).closest('.viz-types').find('.selected-option').html('All Cities');
+                    } else {
+                        currentCity(_city);
+                        currentVizType('single-city');
+                        $(this).closest('.viz-types').find('.selected-option').html(cities[_city].label);
+                    }
+
+                    $(this).closest('.item-parent').toggleClass('expanded');
+
+
+                    updateCalendars();
+                });
+            });
+
+            /**
+             * Rebuilds the calendars based on the current metric and date
+             */
+            function updateCalendars() {
+                initCalendars(currentMetric(), currentDate().year, currentDate().month);
+            }
+
+        </script>
+
+    </head>
+
+    <body>
+
+        <div class="navbar">
+            <div class="share-icons">
+                Fb
+            </div>
+        </div>
+
+        <div class="left-panel-icons side-panel">
+            <ul>
+                <li class="pane-option">
+                    <span class="glyphicon glyphicon-th"></span>
+                    <span class="label">Metrics</span>
+                </li>
+                <li class="pane-option">
+                    <span class="glyphicon glyphicon-th"></span>
+                    <span class="label">Visualization</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="left-panel-primary side-panel">
+            <label>City Dots</label>
+
+            <div class="tab-metrics">
+                <div class="title">Metrics</div>
+                <ul class="metrics">
+                    <li data-metric="dust">
+                        Dust
+                    </li>
+                    <li data-metric="humidity">
+                        Humidity
+                    </li>
+                    <li data-metric="light">
+                        Light
+                    </li>
+                    <li data-metric="sound">
+                        Noise
+                    </li>
+                    <li data-metric="airquality_raw">
+                        Pollution
+                    </li>
+                    <li data-metric="temperature">
+                        Temperature
+                    </li>
+                </ul>
+            </div>
+
+            <div class="tab-viz-types">
+                <div class="title">Cities</div>
+                <ul class="viz-types">
+                    <li class="active selected-option">
+                        All Cities
+                    </li>
+                    <li class="item-parent">
+                        <span class="not-selected">Select City...</span>
+                        <div class="item-child">
+                            <div class="tab-cities">
+                                <ul class="cities">
+                                    <li data-city="all">
+                                        All Cities
+                                    </li>
+                                    <li data-city="bangalore">
+                                        Bangalore
+                                    </li>
+                                    <li data-city="boston">
+                                        Boston
+                                    </li>
+                                    <li data-city="geneva">
+                                        Geneve
+                                    </li>
+                                    <li data-city="rio">
+                                        Rio de Janeiro
+                                    </li>
+                                    <li data-city="san-francisco">
+                                        San Francisco
+                                    </li>
+                                    <li data-city="shanghai">
+                                        Shanghai
+                                    </li>
+                                    <li data-city="singapore">
+                                        Singapore
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="tab-dates">
+                <div class="title">Time Frame</div>
+                <ul class="dates">
+                    <li data-year="2015" data-month="1">
+                        January 2015
+                    </li>
+                    <li data-year="2015" data-month="2">
+                        February 2015
+                    </li>
+                    <li data-year="2015" data-month="3">
+                        March 2015
+                    </li>
+                </ul>
+            </div>
+
+            <div class="tab-legend">
+                <div class="title">Legend</div>
+                <ul class="legend-dot">
+                    <li>
+                        <span class="circle"></span> → &nbsp; 1 Hour
+                    </li>
+                </ul>
+            </div>
+
+            <div class="tab-metric-scale">
+                <div class="title">Colors</div>
+                <ul class="legend-colors">
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="small-multiples">
+            <div id="cal-0" class="cal-wrapper">
+                <div class="primary-label">Bangalore</div>
+                <div class="secondary-label"></div>
+                <div class="city-cal">
+                    <div class="cal-placeholder"></div>
+                </div>
+            </div>
+            <div id="cal-1" class="cal-wrapper">
+                <div class="primary-label">Boston</div>
+                <div class="secondary-label"></div>
+                <div class="city-cal">
+                    <div class="cal-placeholder"></div>
+                </div>
+            </div>
+            <div id="cal-2" class="cal-wrapper">
+                <div class="primary-label">Geneve</div>
+                <div class="secondary-label"></div>
+                <div class="city-cal">
+                    <div class="cal-placeholder"></div>
+                </div>
+            </div>
+            <div id="cal-3" class="cal-wrapper">
+                <div class="primary-label">Rio</div>
+                <div class="secondary-label"></div>
+                <div class="city-cal">
+                    <div class="cal-placeholder"></div>
+                </div>
+            </div>
+            <div id="cal-4" class="cal-wrapper">
+                <div class="primary-label">San Francisco</div>
+                <div class="secondary-label"></div>
+                <div class="city-cal">
+                    <div class="cal-placeholder"></div>
+                </div>
+            </div>
+            <div id="cal-5" class="cal-wrapper">
+                <div class="primary-label">Shanghai</div>
+                <div class="secondary-label"></div>
+                <div class="city-cal">
+                    <div class="cal-placeholder"></div>
+                </div>
+            </div>
+            <div id="cal-6" class="cal-wrapper">
+                <div class="primary-label">Singapore</div>
+                <div class="secondary-label"></div>
+                <div class="city-cal">
+                    <div class="cal-placeholder"></div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
