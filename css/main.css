@@ -1,0 +1,413 @@
+body {
+    font-family: "Lato", "Helvetica Neue",Helvetica,Arial,sans-serif;
+    background: #f3f3f3;
+}
+
+[metric="none"] .q1, [metric="none"] .q2, [metric="none"] .q3, [metric="none"] .q4, [metric="none"] .q5, [metric="none"] .q6, [metric="none"] .q7 {
+    background-color: #eee;
+    fill: #eee;
+}
+
+[metric="humidity"] .q1 {
+    background-color: #ffffb2;
+    fill: #ffffb2;
+}
+[metric="humidity"] .q2 {
+    background-color: #fed976;
+    fill: #fed976;
+}
+[metric="humidity"] .q3 {
+    background-color: #feb24c;
+    fill: #feb24c;
+}
+[metric="humidity"] .q4 {
+    background-color: #fd8d3c;
+    fill: #fd8d3c;
+}
+[metric="humidity"] .q5 {
+    background-color: #fc4e2a;
+    fill: #fc4e2a;
+}
+[metric="humidity"] .q6 {
+    background-color: #e31a1c;
+    fill: #e31a1c;
+}
+[metric="humidity"] .q7 {
+    background-color: #b10026;
+    fill: #b10026;
+}
+
+[metric="light"] .q1 {
+    background-color: #0c2c84;
+    fill: #0c2c84;
+}
+[metric="light"] .q2 {
+    background-color: #225ea8;
+    fill: #225ea8;
+}
+[metric="light"] .q3 {
+    background-color: #1d91c0;
+    fill: #1d91c0;
+}
+[metric="light"] .q4 {
+    background-color: #41b6c4;
+    fill: #41b6c4;
+}
+[metric="light"] .q5 {
+    background-color: #7fcdbb;
+    fill: #7fcdbb;
+}
+[metric="light"] .q6 {
+    background-color: #c7e9b4;
+    fill: #c7e9b4;
+}
+[metric="light"] .q7 {
+    background-color: rgb(255, 232, 170);
+    fill: rgb(255, 232, 170);
+}
+
+
+[metric="sound"] .q1 {
+    background: #bfd3e6;
+    fill: #bfd3e6;
+}
+[metric="sound"] .q2 {
+    background: #9ebcda;
+    fill: #9ebcda;
+}
+[metric="sound"] .q3 {
+    background: #8c96c6;
+    fill: #8c96c6;
+}
+[metric="sound"] .q4 {
+    background: #8c6bb1;
+    fill: #8c6bb1;
+}
+[metric="sound"] .q5 {
+    background: #88419d;
+    fill: #88419d;
+}
+[metric="sound"] .q6 {
+    background: #6e016b;
+    fill: #6e016b;
+}
+
+
+
+[metric="temperature"] .q1 {
+    background: rgb(12,44,132);
+    fill: rgb(12,44,132);
+}
+[metric="temperature"] .q2 {
+    background: rgb(34,94,168);
+    fill: rgb(34,94,168);
+}
+[metric="temperature"] .q3 {
+    background: rgb(29,145,192);
+    fill: rgb(29,145,192);
+}
+[metric="temperature"] .q4 {
+    background: rgb(65,182,196);
+    fill: rgb(65,182,196);
+}
+[metric="temperature"] .q5 {
+    background: rgb(127,205,187);
+    fill: rgb(127,205,187);
+}
+[metric="temperature"] .q6 {
+    background: rgb(245, 183, 171);
+    fill: rgb(245, 183, 171);
+}
+[metric="temperature"] .q7 {
+    background: rgb(238, 131, 110);
+    fill: rgb(238, 131, 110);
+}
+[metric="temperature"] .q8 {
+    background: rgb(232, 92, 65);
+    fill: rgb(232, 92, 65);
+}
+[metric="temperature"] .q9 {
+    background: rgb(219, 58, 27);
+    fill: rgb(219, 58, 27);
+}
+
+rect {
+    shape-rendering: auto;
+}
+
+.navbar {
+    background-color: #f3f3f3;
+    border: 1px solid #ddd;
+    border-left: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    min-height: 40px;
+    margin: 0;
+}
+
+/** Side Panels --------------------------------------------------------- */
+
+.side-panel {
+    background-color: #444;
+    color:  #eee;
+    width: 200px;
+    position: fixed;
+    top:0;
+    bottom: 0;
+    left: 0;
+    /*overflow-y: auto;*/
+    z-index: 20;
+}
+
+.left-panel-icons {
+    display: none
+    left: 0;
+    padding-top: 40px;
+    width: 80px;
+}
+
+li.pane-option {
+    margin: 10px;
+}
+
+.left-panel-primary {
+    left: 0px;
+    border-left: 1px solid #333;
+}
+
+.left-panel-secondary {
+    left: 200px;
+    border-left: 1px solid #333;
+}
+
+.side-panel label {
+    background-color: #333;
+    border-bottom: 1px solid #666;
+    display: block;
+    padding: 10px;
+    text-transform: none;
+    margin-bottom: 0;
+}
+
+.side-panel .title {
+    background: #333;
+    color: #ccc;
+    padding: 10px 10px;
+    border-bottom: 1px solid #666;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.side-panel ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-panel ul li {
+    border-bottom: 1px solid #666;
+    cursor: pointer;
+    color: #aaa;
+    padding: 5px 10px;
+    display: block;
+    position: relative;
+}
+
+.side-panel ul li.item-parent {
+    padding: 0;
+}
+
+.side-panel ul li.item-parent span {
+    border-bottom: 1px solid transparent;
+    display: block;
+    padding: 5px 10px;
+}
+
+.side-panel ul li.item-parent.expanded span {
+    border-bottom: 1px solid #666;
+}
+
+.side-panel .item-child ul li {
+    background-color: #555;
+}
+
+.side-panel .item-child ul li {
+    border-bottom: 1px solid #777;
+}
+
+li.item-parent span.not-selected {
+    font-style: italic;
+}
+
+.side-panel ul li.item-parent .item-child {
+    display: none;
+}
+
+.side-panel ul li.item-parent.expanded .item-child {
+    display: block;
+}
+
+.side-panel li:hover, .side-panel li.active {
+    color: #eee;
+}
+
+.left-panel-primary li.active:after {
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent #ffffff transparent transparent;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -10px;
+    content: "";
+}
+
+.left-panel-primary li.active.expanded:after {
+    top: 15px;
+}
+
+.legend-colors li, .legend-dot li {
+    vertical-align: top;
+    padding: 6px 10px;
+    cursor: default;
+    line-height: 16px;
+}
+
+.circle {
+    background: #eee;
+    border-radius: 8px;
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}
+
+
+.side-panel[data-viz-type="single-city"] .tab-dates {
+    display: none;
+}
+
+/** Calendar columns -------------------------------------------------------------------- */
+.small-multiples {
+    position: absolute;
+    left: 0px;
+}
+
+.cal-wrapper {
+    border-right: 1px solid #eee;
+    border-top: 1px solid #ddd;
+    float: left;
+    background-color: white;
+    display: none;
+}
+
+.cal-wrapper:last-of-type {
+    border-right: 1px solid #ddd;
+}
+
+.cal-wrapper.has-data {
+    display: block;
+}
+
+.cal-wrapper .secondary-label {
+    margin-top: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #999;
+    font-size: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #f3f3f3;
+}
+
+.cal-wrapper .primary-label {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-left: 0;
+    height: 40px;
+    width: 157px;
+    position: fixed;
+    top: 0;
+    padding: 10px 0;
+    font-weight: bold;
+    display: block;
+    color: #666;
+    text-align: center;
+    z-index: 10;
+}
+
+.cal-wrapper .city-cal {
+    padding: 25px 25px;
+}
+
+.cal-heatmap-container .graph-label {
+    font-family: "Lato", "sans-serif";
+}
+
+.cal-heatmap-container {
+    width: 106px;
+}
+
+
+
+
+            @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+            @font-face {
+                font-weight: normal;
+                font-style: normal;
+                font-family: 'codropsicons';
+                src:url('../fonts/codropsicons/codropsicons.eot');
+                src:url('../fonts/codropsicons/codropsicons.eot?#iefix') format('embedded-opentype'),
+                    url('../fonts/codropsicons/codropsicons.woff') format('woff'),
+                    url('../fonts/codropsicons/codropsicons.ttf') format('truetype'),
+                    url('../fonts/codropsicons/codropsicons.svg#codropsicons') format('svg');
+            }
+
+            .container {
+                background: #f3f3f3;
+            }
+
+            @media screen and (min-width: 800px) {
+                .mp-menu ul li > a {
+                    font-size: 1em;
+                }
+                .mp-menu ul li::before {
+                    line-height: 3;
+                }
+            }
+
+            .mp-menu {
+                width: 250px;
+            }
+
+            .mp-menu h2 {
+                color: #ccc;
+                font-size: 1em;
+            }
+
+            body {
+                color: #fff;
+                font-weight: 300;
+                font-family: 'Lato', Calibri, Arial, sans-serif;
+            }
+
+            a {
+                text-decoration: none;
+                color: #ddd;
+                outline: none;
+            }
+
+            a:hover, a:focus {
+                color: #fff;
+                outline: none;
+            }
+
+            .mp-pusher.mp-pushed::after{
+                display: none;
+            }
+

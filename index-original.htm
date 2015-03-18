@@ -7,17 +7,17 @@
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
         <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
         <script src="vendor/moment/moment.js" charset="utf-8"></script>
         <script src="vendor/moment/moment-timezone-with-data.js" charset="utf-8"></script>
         <script src="vendor/cal-heatmap/cal-heatmap.js" charset="utf-8"></script>
         <link href='vendor/cal-heatmap/cal-heatmap.css' rel='stylesheet' />
-        <script src="js/modernizr.custom.js"></script>
 
-        <link rel="stylesheet" type="text/css" href="css/normalize.css" />
-        <link rel="stylesheet" type="text/css" href="css/icons.css" />
-        <link rel="stylesheet" type="text/css" href="css/component.css" />
-        <link rel="stylesheet" type="text/css" href="css/main.css" />
+
+        <link href='css/main-original.css' rel='stylesheet' />
 
         <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
@@ -475,143 +475,13 @@
 
     <body>
 
-        <div class="container">
-            <!-- Push Wrapper -->
-            <div class="mp-pusher" id="mp-pusher">
-                <!-- mp-menu -->
-                <nav id="mp-menu" class="mp-menu">
-                    <div class="mp-level">
-                        <h2 class="">City Dots</h2>
-                        <ul>
-                            <!-- <li><a class="icon icon-photo" href="#">All Cities</a></li> -->
-
-                            <li class="icon icon-arrow-left">
-                                <a class="icon icon-location" href="#">All Cities</a>
-                                <div class="mp-level">
-                                    <h2 class="icon icon-location">Cities</h2>
-                                    <a class="mp-back" href="#">back</a>
-                                    <ul>
-                                        <li><a href="#">Bangalore</a></li>
-                                        <li><a href="#">Boston</a></li>
-                                        <li><a href="#">Geneva</a></li>
-                                        <li><a href="#">San Francisco</a></li>
-                                        <li><a href="#">Shanghai</a></li>
-                                        <li><a href="#">Singapore</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-
-                            <li class="icon icon-arrow-left">
-                                <a class="icon icon-params" href="#">Humidity</a>
-                                <div class="mp-level">
-                                    <h2 class="icon icon-params">Metrics</h2>
-                                    <a class="mp-back" href="#">back</a>
-                                    <ul>
-                                        <li><a href="#">Noise</a></li>
-                                        <li><a href="#">Humidity</a></li>
-                                        <li><a href="#">Light</a></li>
-                                        <li><a href="#">Air Pollution</a></li>
-                                        <li><a href="#">Dust</a></li>
-                                        <li><a href="#">Temperature</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-
-                            <li class="icon icon-arrow-left">
-                                <a class="icon icon-calendar" href="#">February 2015</a>
-                                <div class="mp-level">
-                                    <h2 class="icon icon-calendar">Time Frame</h2>
-                                    <a class="mp-back" href="#">back</a>
-                                    <ul>
-                                        <li><a href="#">January 2015</a></li>
-                                        <li><a href="#">February 2015</a></li>
-                                        <li><a href="#">March 2015</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-
-                        </ul>
-                    </div>
-                </nav>
-                <!-- /mp-menu -->
-
-                <div class="scroller">
-                    <div class="scroller-inner">
-                        <a href="#" id="trigger" class="menu-trigger" style="display: none;">Open/Close Menu</a>
-
-                        <div class="small-multiples">
-                            <div id="cal-0" class="cal-wrapper">
-                                <div class="primary-label">Bangalore</div>
-                                <div class="secondary-label"></div>
-                                <div class="city-cal">
-                                    <div class="cal-placeholder"></div>
-                                </div>
-                            </div>
-                            <div id="cal-1" class="cal-wrapper">
-                                <div class="primary-label">Boston</div>
-                                <div class="secondary-label"></div>
-                                <div class="city-cal">
-                                    <div class="cal-placeholder"></div>
-                                </div>
-                            </div>
-                            <div id="cal-2" class="cal-wrapper">
-                                <div class="primary-label">Geneve</div>
-                                <div class="secondary-label"></div>
-                                <div class="city-cal">
-                                    <div class="cal-placeholder"></div>
-                                </div>
-                            </div>
-                            <div id="cal-3" class="cal-wrapper">
-                                <div class="primary-label">Rio</div>
-                                <div class="secondary-label"></div>
-                                <div class="city-cal">
-                                    <div class="cal-placeholder"></div>
-                                </div>
-                            </div>
-                            <div id="cal-4" class="cal-wrapper">
-                                <div class="primary-label">San Francisco</div>
-                                <div class="secondary-label"></div>
-                                <div class="city-cal">
-                                    <div class="cal-placeholder"></div>
-                                </div>
-                            </div>
-                            <div id="cal-5" class="cal-wrapper">
-                                <div class="primary-label">Shanghai</div>
-                                <div class="secondary-label"></div>
-                                <div class="city-cal">
-                                    <div class="cal-placeholder"></div>
-                                </div>
-                            </div>
-                            <div id="cal-6" class="cal-wrapper">
-                                <div class="primary-label">Singapore</div>
-                                <div class="secondary-label"></div>
-                                <div class="city-cal">
-                                    <div class="cal-placeholder"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div><!-- /scroller-inner -->
-                </div><!-- /scroller -->
-
-            </div><!-- /pusher -->
-        </div><!-- /container -->
-        <script src="js/classie.js"></script>
-        <script src="js/mlpushmenu.js"></script>
-        <script>
-            var menu = new mlPushMenu( document.getElementById( 'mp-menu' ), document.getElementById( 'trigger' ) );
-            menu._openMenu();
-        </script>
-
-
-
-        <div class="navbar" style="display: none;">
+        <div class="navbar">
             <div class="share-icons">
                 Fb
             </div>
         </div>
 
-        <div class="left-panel-icons side-panel" style="display: none;">
+        <div class="left-panel-icons side-panel">
             <ul>
                 <li class="pane-option">
                     <span class="glyphicon glyphicon-th"></span>
@@ -624,7 +494,7 @@
             </ul>
         </div>
 
-        <div class="left-panel-primary side-panel" style="display: none;">
+        <div class="left-panel-primary side-panel">
             <label>City Dots</label>
 
             <div class="tab-metrics">
@@ -724,6 +594,58 @@
             </div>
         </div>
 
+
+        <div class="small-multiples">
+            <div id="cal-0" class="cal-wrapper">
+                <div class="primary-label">Bangalore</div>
+                <div class="secondary-label"></div>
+                <div class="city-cal">
+                    <div class="cal-placeholder"></div>
+                </div>
+            </div>
+            <div id="cal-1" class="cal-wrapper">
+                <div class="primary-label">Boston</div>
+                <div class="secondary-label"></div>
+                <div class="city-cal">
+                    <div class="cal-placeholder"></div>
+                </div>
+            </div>
+            <div id="cal-2" class="cal-wrapper">
+                <div class="primary-label">Geneve</div>
+                <div class="secondary-label"></div>
+                <div class="city-cal">
+                    <div class="cal-placeholder"></div>
+                </div>
+            </div>
+            <div id="cal-3" class="cal-wrapper">
+                <div class="primary-label">Rio</div>
+                <div class="secondary-label"></div>
+                <div class="city-cal">
+                    <div class="cal-placeholder"></div>
+                </div>
+            </div>
+            <div id="cal-4" class="cal-wrapper">
+                <div class="primary-label">San Francisco</div>
+                <div class="secondary-label"></div>
+                <div class="city-cal">
+                    <div class="cal-placeholder"></div>
+                </div>
+            </div>
+            <div id="cal-5" class="cal-wrapper">
+                <div class="primary-label">Shanghai</div>
+                <div class="secondary-label"></div>
+                <div class="city-cal">
+                    <div class="cal-placeholder"></div>
+                </div>
+            </div>
+            <div id="cal-6" class="cal-wrapper">
+                <div class="primary-label">Singapore</div>
+                <div class="secondary-label"></div>
+                <div class="city-cal">
+                    <div class="cal-placeholder"></div>
+                </div>
+            </div>
+        </div>
 
     </body>
 </html>
