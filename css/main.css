@@ -1,6 +1,22 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+/*@font-face {
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'codropsicons';
+    src:url('../fonts/codropsicons/codropsicons.eot');
+    src:url('../fonts/codropsicons/codropsicons.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/codropsicons/codropsicons.woff') format('woff'),
+        url('../fonts/codropsicons/codropsicons.ttf') format('truetype'),
+        url('../fonts/codropsicons/codropsicons.svg#codropsicons') format('svg');
+}*/
+
+
+
 body {
-    font-family: "Lato", "Helvetica Neue",Helvetica,Arial,sans-serif;
     background: #f3f3f3;
+    font-family: "Lato", "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 300;
+    font-family: 'Lato', Calibri, Arial, sans-serif;
 }
 
 [metric="none"] .q1, [metric="none"] .q2, [metric="none"] .q3, [metric="none"] .q4, [metric="none"] .q5, [metric="none"] .q6, [metric="none"] .q7 {
@@ -354,60 +370,43 @@ li.item-parent span.not-selected {
 }
 
 
+/** Multi layer push menu */
 
 
-            @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
-            @font-face {
-                font-weight: normal;
-                font-style: normal;
-                font-family: 'codropsicons';
-                src:url('../fonts/codropsicons/codropsicons.eot');
-                src:url('../fonts/codropsicons/codropsicons.eot?#iefix') format('embedded-opentype'),
-                    url('../fonts/codropsicons/codropsicons.woff') format('woff'),
-                    url('../fonts/codropsicons/codropsicons.ttf') format('truetype'),
-                    url('../fonts/codropsicons/codropsicons.svg#codropsicons') format('svg');
-            }
 
-            .container {
-                background: #f3f3f3;
-            }
+.container {
+    background: #f3f3f3;
+}
 
-            @media screen and (min-width: 800px) {
-                .mp-menu ul li > a {
-                    font-size: 1em;
-                }
-                .mp-menu ul li::before {
-                    line-height: 3;
-                }
-            }
+.mp-menu {
+    width: 250px;
+}
 
-            .mp-menu {
-                width: 250px;
-            }
+.mp-menu h2 {
+    color: #ccc;
+    font-size: 1em;
+}
 
-            .mp-menu h2 {
-                color: #ccc;
-                font-size: 1em;
-            }
+.mp-menu ul li > a {
+    font-size: 1em;
+}
+.mp-menu ul li::before {
+    line-height: 3;
+}
 
-            body {
-                color: #fff;
-                font-weight: 300;
-                font-family: 'Lato', Calibri, Arial, sans-serif;
-            }
+a {
+    text-decoration: none;
+    color: #ddd;
+    outline: none;
+}
 
-            a {
-                text-decoration: none;
-                color: #ddd;
-                outline: none;
-            }
+a:hover, a:focus {
+    color: #fff;
+    outline: none;
+}
 
-            a:hover, a:focus {
-                color: #fff;
-                outline: none;
-            }
-
-            .mp-pusher.mp-pushed::after{
-                display: none;
-            }
+/** disable main overlay */
+.mp-pusher.mp-pushed::after{
+    display: none;
+}
 
