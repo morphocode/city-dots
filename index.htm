@@ -360,6 +360,9 @@
                 if (arguments.length) {
                     $('.metrics li').removeClass('active');
                     $('.metrics li[data-metric='+metric+']').addClass('active');
+
+                    var title = $('ul.metrics li.active a').html();
+                    $('.menu-metrics .menu-label').html(title);
                 } else {
                     return $(".metrics li.active").data('metric');
                 }
@@ -372,6 +375,9 @@
                 if (arguments.length) {
                     $('ul.dates li').removeClass('active');
                     $('ul.dates li[data-year='+year+'][data-month='+month+']').addClass('active');
+
+                    var title = $('ul.dates li.active a').html();
+                    $('.menu-dates .menu-label').html(title);
                 } else {
                     var $activeDate = $('.dates li.active');
                     return {
@@ -402,6 +408,15 @@
                 if (arguments.length) {
                     $('ul.cities li[data-city]').removeClass('active');
                     $('ul.cities li[data-city='+city+']').addClass('active');
+
+                    if (city == 'all') {
+                        currentVizType('all-cities');
+                    } else {
+                        currentVizType('single-city');
+                    }
+
+                    var title = $('ul.cities li.active a').html();
+                    $('.menu-cities .menu-label').html(title);
                 } else {
                     return $("ul.cities li[data-city].active").data('city');
                 }
@@ -410,7 +425,7 @@
 
             $(document).ready(function() {
 
-
+                currentCity('all');
                 currentMetric('sound');
                 currentDate(2015, 2);
                 currentVizType('all-cities');
@@ -446,16 +461,7 @@
 
                 $(".cities li").click(function(event) {
                     var _city = $(this).data('city');
-                    if (_city == 'all') {
-                        currentVizType('all-cities');
-                        $(this).closest('.viz-types').find('.selected-option').html('All Cities');
-                    } else {
-                        currentCity(_city);
-                        currentVizType('single-city');
-                        $(this).closest('.viz-types').find('.selected-option').html(cities[_city].label);
-                    }
-
-                    $(this).closest('.item-parent').toggleClass('expanded');
+                    currentCity(_city);
 
 
                     updateCalendars();
@@ -485,58 +491,103 @@
                         <ul>
                             <!-- <li><a class="icon icon-photo" href="#">All Cities</a></li> -->
 
-                            <li class="icon icon-arrow-left">
-                                <a class="icon icon-location" href="#">All Cities</a>
+                            <li class="legend">
+                                <div class="tab-legend">
+                                    <div class="title">Legend</div>
+                                    <ul class="legend-dot">
+                                        <li>
+                                            <span class="circle"></span> → &nbsp; 1 Hour
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab-metric-scale">
+                                    <div class="title">Colors</div>
+                                    <ul class="legend-colors">
+                                    </ul>
+                                </div>
+                            </li>
+
+
+
+                            <li class="menu-cities icon icon-arrow-left">
+                                <a class="menu-label icon icon-location" href="#">All Cities</a>
                                 <div class="mp-level">
                                     <h2 class="icon icon-location">Cities</h2>
                                     <a class="mp-back" href="#">back</a>
-                                    <ul>
-                                        <li><a href="#">Bangalore</a></li>
-                                        <li><a href="#">Boston</a></li>
-                                        <li><a href="#">Geneva</a></li>
-                                        <li><a href="#">San Francisco</a></li>
-                                        <li><a href="#">Shanghai</a></li>
-                                        <li><a href="#">Singapore</a></li>
+                                    <ul class="cities">
+                                        <li data-city="all">
+                                            <a href="#">All Cities</a>
+                                        </li>
+                                        <li data-city="bangalore">
+                                            <a href="#">Bangalore</a>
+                                        </li>
+                                        <li data-city="boston">
+                                            <a href="#">Boston</a>
+                                        </li>
+                                        <li data-city="geneva">
+                                            <a href="#">Geneva</a>
+                                        </li>
+                                        <li data-city="rio">
+                                            <a href="#">Rio de Janeiro</a>
+                                        </li>
+                                        <li data-city="san-francisco">
+                                            <a href="#">San Francisco</a>
+                                        </li>
+                                        <li data-city="shanghai">
+                                            <a href="#">Shanghai</a>
+                                        </li>
+                                        <li data-city="singapore">
+                                            <a href="#">Singapore</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
 
-                            <li class="icon icon-arrow-left">
-                                <a class="icon icon-params" href="#">Humidity</a>
+                            <li class="menu-metrics icon icon-arrow-left">
+                                <a class="menu-label icon icon-params" href="#">Humidity</a>
                                 <div class="mp-level">
                                     <h2 class="icon icon-params">Metrics</h2>
                                     <a class="mp-back" href="#">back</a>
-                                    <ul>
-                                        <li><a href="#">Noise</a></li>
-                                        <li><a href="#">Humidity</a></li>
-                                        <li><a href="#">Light</a></li>
-                                        <li><a href="#">Air Pollution</a></li>
-                                        <li><a href="#">Dust</a></li>
-                                        <li><a href="#">Temperature</a></li>
+                                    <ul class="metrics">
+                                        <li data-metric="dust">
+                                            <a href="#">Dust</a>
+                                        </li>
+                                        <li data-metric="humidity">
+                                            <a href="#">Humidity</a>
+                                        </li>
+                                        <li data-metric="light">
+                                            <a href="#">Light</a>
+                                        </li>
+                                        <li data-metric="sound">
+                                            <a href="#">Noise</a>
+                                        </li>
+                                        <li data-metric="airquality_raw">
+                                            <a href="#">Pollution</a>
+                                        </li>
+                                        <li data-metric="temperature">
+                                            <a href="#">Temperature</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
 
-                            <li class="icon icon-arrow-left">
-                                <a class="icon icon-calendar" href="#">February 2015</a>
+                            <li class="menu-dates icon icon-arrow-left">
+                                <a class="menu-label icon icon-calendar" href="#">February 2015</a>
                                 <div class="mp-level">
                                     <h2 class="icon icon-calendar">Time Frame</h2>
                                     <a class="mp-back" href="#">back</a>
-                                    <ul>
-                                        <li><a href="#">January 2015</a></li>
-                                        <li><a href="#">February 2015</a></li>
-                                        <li><a href="#">March 2015</a></li>
+                                    <ul class="dates">
+                                        <li data-year="2015" data-month="1">
+                                            <a href="#">January 2015</a>
+                                        </li>
+                                        <li data-year="2015" data-month="2">
+                                            <a href="#">February 2015</a>
+                                        </li>
+                                        <li data-year="2015" data-month="3">
+                                            <a href="#">March 2015</a>
+                                        </li>
                                     </ul>
                                 </div>
-                            </li>
-
-                            <li class="tab-legend">
-                                <div class="title">Legend</div>
-                                <ul class="legend-dot">
-                                    <li>
-                                        <span class="circle"></span> → &nbsp; 1 Hour
-                                    </li>
-                                </ul>
                             </li>
 
                         </ul>

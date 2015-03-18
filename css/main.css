@@ -208,7 +208,7 @@ li.pane-option {
     margin-bottom: 0;
 }
 
-.side-panel .title {
+.legend .title {
     background: #333;
     color: #ccc;
     padding: 10px 10px;
@@ -224,7 +224,7 @@ li.pane-option {
     margin: 0;
 }
 
-.side-panel ul li {
+.legend ul li {
     border-bottom: 1px solid #666;
     cursor: pointer;
     color: #aaa;
@@ -391,7 +391,12 @@ li.item-parent span.not-selected {
     font-size: 1em;
 }
 .mp-menu ul li::before {
-    line-height: 3;
+    color: rgba(255, 255, 255, 0.3);
+    line-height: 2.7;
+}
+
+.mp-back::after {
+    color: rgba(255, 255, 255, 0.3);
 }
 
 a {
@@ -410,3 +415,10 @@ a:hover, a:focus {
     display: none;
 }
 
+
+
+.legend {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
