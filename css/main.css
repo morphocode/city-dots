@@ -311,16 +311,37 @@ li.item-parent span.not-selected {
 
 /** Calendar columns -------------------------------------------------------------------- */
 .small-multiples {
-    position: absolute;
-    left: 0px;
 }
+
+/** hide columns when no space is available */
+@media only screen and (max-width: 1300px) {
+    table.small-multiples td:nth-child(7),
+    table.small-multiples th:nth-child(7) {display: none;}
+}
+@media only screen and (max-width: 1140px) {
+    table.small-multiples td:nth-child(6),
+    table.small-multiples th:nth-child(6) {display: none;}
+}
+@media only screen and (max-width: 980px) {
+    table.small-multiples td:nth-child(5),
+    table.small-multiples th:nth-child(5) {display: none;}
+}
+@media only screen and (max-width: 820px) {
+    table.small-multiples td:nth-child(4),
+    table.small-multiples th:nth-child(4) {display: none;}
+}
+@media only screen and (max-width: 600px) {
+    table.small-multiples td:nth-child(3),
+    table.small-multiples th:nth-child(3) {display: none;}
+}
+
+
 
 .cal-wrapper {
     border-right: 1px solid #eee;
     border-top: 1px solid #ddd;
-    float: left;
     background-color: white;
-    display: none;
+    visibility: hidden;
 }
 
 .cal-wrapper:last-of-type {
@@ -328,7 +349,7 @@ li.item-parent span.not-selected {
 }
 
 .cal-wrapper.has-data {
-    display: block;
+    visibility: visible;
 }
 
 .cal-wrapper .secondary-label {
