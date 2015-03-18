@@ -212,7 +212,7 @@ li.pane-option {
     background: #333;
     color: #ccc;
     padding: 10px 10px;
-    border-bottom: 1px solid #666;
+    border-bottom: 1px solid rgba(153,153,153,0.2);
     text-transform: uppercase;
     font-size: 10px;
     font-weight: bold;
@@ -225,10 +225,10 @@ li.pane-option {
 }
 
 .legend ul li {
-    border-bottom: 1px solid #666;
+    border-bottom: 1px solid rgba(153,153,153,0.2);
     cursor: pointer;
     color: #aaa;
-    padding: 5px 10px;
+    padding: 10px;
     display: block;
     position: relative;
 }
@@ -339,6 +339,7 @@ li.item-parent span.not-selected {
     font-size: 10px;
     padding: 10px;
     border-bottom: 1px solid #f3f3f3;
+    font-weight: 400;
 }
 
 .cal-wrapper .primary-label {
@@ -363,6 +364,7 @@ li.item-parent span.not-selected {
 
 .cal-heatmap-container .graph-label {
     font-family: "Lato", "sans-serif";
+    font-weight: 400;
 }
 
 .cal-heatmap-container {
@@ -383,6 +385,7 @@ li.item-parent span.not-selected {
 }
 
 .mp-menu h2 {
+    border-bottom: 1px solid rgba(153,153,153,0.2);
     color: #ccc;
     font-size: 1em;
 }
@@ -421,4 +424,9 @@ a:hover, a:focus {
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+
+
+.tab-metric-scale .title {
+    display: none;
 }
