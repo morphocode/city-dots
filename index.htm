@@ -3,7 +3,14 @@
     <head>
         <meta charset='utf-8' />
         <title>City Dots</title>
+        <meta name="description" content="City Dots visualizes the air quality, dust, light, sound, temperature, and humidity of 7 cities. | MORPHOCODE">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+        <meta property="og:title" content="City Dots visualizes the air quality, dust, light, sound, temperature, and humidity of 7 cities. | MORPHOCODE" />
+        <meta property="og:description" content="City Dots visualizes the air quality, dust, light, sound, temperature, and humidity of 7 cities." />
+        <!-- <meta property="og:image" content="http://io.morphocode.com/urban-layers/images/screenshots/morphocode-urban-layers-manhattan-buildings-all-long.jpg" /> -->
+
+        <link rel="shortcut icon" href="images/favicon.ico"/>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
@@ -43,15 +50,11 @@
     <body>
 
         <div class="container">
-            <!-- Push Wrapper -->
             <div class="mp-pusher" id="mp-pusher">
-                <!-- mp-menu -->
                 <nav id="mp-menu" class="mp-menu">
                     <div class="mp-level">
                         <h2 class="">City Dots</h2>
                         <ul>
-                            <!-- <li><a class="icon icon-photo" href="#">All Cities</a></li> -->
-
                             <li class="legend">
                                 <div class="tab-legend">
                                     <div class="title">Legend</div>
@@ -149,11 +152,29 @@
                                 </div>
                             </li>
 
+                            <li class="menu-viz-types" style="display: none;"><a class="icon icon-photo" href="#">Visualization</a></li>
+
+                            <!-- <li><a class="icon icon-photo" href="#">All Cities</a></li> -->
+                            <li class="menu-about icon icon-arrow-left">
+                                <a class="menu-label icon icon-star" href="#">About</a>
+                                <div class="mp-level">
+                                    <h2 class="icon icon-star">About</h2>
+                                    <a class="mp-back" href="#">back</a>
+                                    <p>
+                                    CityDots is an interactive visualization that compares 5 key urban metrics of 7 different cities around the world.
+                                    </p>
+                                    <h3>Data</h3>
+                                    <p>The data is collected from multiple sensor nodes deployed in each of the 7 cities. Each node contains the same 5 sensors that measure air quality, dust, light, sound, temperature, and humidity.
+                                    The data is being collected to empower citizens with real-time information about their surroundings.
+                                    <a href="http://map.datacanvas.org/#!/data">Learn more.</a>
+                                    </p>
+                                </div>
+                            </li>
+
                         </ul>
 
                     </div>
                 </nav>
-                <!-- /mp-menu -->
 
                 <div class="scroller">
                     <div class="scroller-inner">
@@ -225,119 +246,6 @@
         <div class="navbar" style="display: none;">
             <div class="share-icons">
                 Fb
-            </div>
-        </div>
-
-        <div class="left-panel-icons side-panel" style="display: none;">
-            <ul>
-                <li class="pane-option">
-                    <span class="glyphicon glyphicon-th"></span>
-                    <span class="label">Metrics</span>
-                </li>
-                <li class="pane-option">
-                    <span class="glyphicon glyphicon-th"></span>
-                    <span class="label">Visualization</span>
-                </li>
-            </ul>
-        </div>
-
-        <div class="left-panel-primary side-panel" style="display: none;">
-            <label>City Dots</label>
-
-            <div class="tab-metrics">
-                <div class="title">Metrics</div>
-                <ul class="metrics">
-                    <li data-metric="dust">
-                        Dust
-                    </li>
-                    <li data-metric="humidity">
-                        Humidity
-                    </li>
-                    <li data-metric="light">
-                        Light
-                    </li>
-                    <li data-metric="sound">
-                        Noise
-                    </li>
-                    <li data-metric="airquality_raw">
-                        Pollution
-                    </li>
-                    <li data-metric="temperature">
-                        Temperature
-                    </li>
-                </ul>
-            </div>
-
-            <div class="tab-viz-types">
-                <div class="title">Cities</div>
-                <ul class="viz-types">
-                    <li class="active selected-option">
-                        All Cities
-                    </li>
-                    <li class="item-parent">
-                        <span class="not-selected">Select City...</span>
-                        <div class="item-child">
-                            <div class="tab-cities">
-                                <ul class="cities">
-                                    <li data-city="all">
-                                        All Cities
-                                    </li>
-                                    <li data-city="bangalore">
-                                        Bangalore
-                                    </li>
-                                    <li data-city="boston">
-                                        Boston
-                                    </li>
-                                    <li data-city="geneva">
-                                        Geneve
-                                    </li>
-                                    <li data-city="rio">
-                                        Rio de Janeiro
-                                    </li>
-                                    <li data-city="san-francisco">
-                                        San Francisco
-                                    </li>
-                                    <li data-city="shanghai">
-                                        Shanghai
-                                    </li>
-                                    <li data-city="singapore">
-                                        Singapore
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="tab-dates">
-                <div class="title">Time Frame</div>
-                <ul class="dates">
-                    <li data-year="2015" data-month="1">
-                        January 2015
-                    </li>
-                    <li data-year="2015" data-month="2">
-                        February 2015
-                    </li>
-                    <li data-year="2015" data-month="3">
-                        March 2015
-                    </li>
-                </ul>
-            </div>
-
-            <div class="tab-legend">
-                <div class="title">Legend</div>
-                <ul class="legend-dot">
-                    <li>
-                        <span class="circle"></span> → &nbsp; 1 Hour
-                    </li>
-                </ul>
-            </div>
-
-            <div class="tab-metric-scale">
-                <div class="title">Colors</div>
-                <ul class="legend-colors">
-                </ul>
             </div>
         </div>
 

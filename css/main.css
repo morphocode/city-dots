@@ -70,6 +70,10 @@ a:hover, a:focus {
     display: none;
 }
 
+.menu-about p {
+    color: #aaa;
+    padding: 0 15px;
+}
 
 
 /** Legend --------------------------------------------------------- */
@@ -179,7 +183,7 @@ a:hover, a:focus {
     border: 1px solid #ddd;
     border-left: 0;
     height: 40px;
-    width: 157px;
+    width: 158px;
     position: fixed;
     top: 0;
     padding: 10px 0;

@@ -140,7 +140,7 @@ var citydots = {};
 
 
     /*
-     * Initialized the application.
+     * Initializes the application.
      * Builds the UI and sets the default metrics.
      */
     function bootstrap() {
@@ -151,6 +151,7 @@ var citydots = {};
         currentVizType('all-cities');
         initCalendars('dust', 2015, 2);
 
+        // handle changes in the metrics
         $(".metrics li").click(function(event) {
             var thisMetric = $(this).data('metric');
             currentMetric(thisMetric);
@@ -158,6 +159,7 @@ var citydots = {};
             updateCalendars();
         });
 
+        // handle changes in the date period
         $(".dates li").click(function(event) {
             var _year = $(this).data('year'),
                 _month = $(this).data('month');
@@ -166,6 +168,7 @@ var citydots = {};
             updateCalendars();
         });
 
+        // handle changes in the city selection
         $(".cities li").click(function(event) {
             var _city = $(this).data('city');
             currentCity(_city);
@@ -221,8 +224,9 @@ var citydots = {};
                 throw new Error('Unsupported visualization type: ' + vizType);
         }
 
-        // update the colors legend and the dates in the side panel
-        updateSidePanel(metric, year, month);
+        // updates the legend
+        $('.tab-metric-scale .title').html(metrics[metric].legendTitle + ' Scale');
+        $('ul.legend-colors').replaceWith(buildLegend(metric));
 
     }
 
@@ -236,7 +240,7 @@ var citydots = {};
 
     /**
      * Builds a calendar for the specified city, metric and date.
-     * Note: we need to rebuild the calendar because the present updateData() of cal-heat doesn't handle range changes well
+     * Note: we need to rebuild the calendar because the available updateData() function of cal-heat doesn't handle changes in the date range
      */
     function initCalendar(id, city, metric, year, month) {
 
@@ -285,26 +289,13 @@ var citydots = {};
             //$(customSettings.itemSelector).width(_width);
         }
 
+        // build the new calendar
         calendars[id] = new CalHeatMap();
         calendars[id].init(customSettings);
 
         // update the corresponding DOM element
         calElement.find('.primary-label').html(cities[city].label);
         calElement.find('.secondary-label').html(startDate.format('MMM YYYY'));
-    }
-
-    /**
-     * Updates the side panel by showing the current date and metrics selected
-     */
-    function updateSidePanel(metric, year, month) {
-        // set the active legent element
-        $('ul.legend-colors').removeClass('active');
-        $('ul.legend-colors[data-metric=' + metric + ']').addClass('active');
-
-        // re-build the legend
-        $('.tab-metric-scale .title').html(metrics[metric].legendTitle + ' Scale');
-        $('ul.legend-colors').replaceWith(buildLegend(metric));
-
     }
 
     /**
@@ -321,7 +312,6 @@ var citydots = {};
         }
 
         legendHtml += '</ul>';
-
         return legendHtml;
     }
 
@@ -439,12 +429,9 @@ var citydots = {};
      */
     function currentVizType(vizType) {
         if (arguments.length) {
-            //$('.viz-types li[data-viz-type]').removeClass('active');
-            //$('.viz-types li[data-viz-type='+vizType+']').addClass('active');
-            $('.left-panel-primary').attr('data-viz-type', vizType);
+            $('.menu-viz-types').attr('data-viz-type', vizType);
         } else {
-            //return $(".viz-types li[data-viz-type].active").data('viz-type');
-            return  $('.left-panel-primary').attr('data-viz-type');
+            return  $('.menu-viz-types').attr('data-viz-type');
         }
     }
 
