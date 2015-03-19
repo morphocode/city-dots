@@ -222,6 +222,40 @@ a:hover, a:focus {
     fill: #eee;
 }
 
+[metric="airquality_raw"] .q1 {
+    background-color: #ece2f0;
+    fill: #ece2f0;
+}
+[metric="airquality_raw"] .q2 {
+    background-color: #d0d1e6;
+    fill: #d0d1e6;
+}
+[metric="airquality_raw"] .q3 {
+    background-color: #a6bddb;
+    fill: #a6bddb;
+}
+[metric="airquality_raw"] .q4 {
+    background-color: #67a9cf;
+    fill: #67a9cf;
+}
+[metric="airquality_raw"] .q5 {
+    background-color: #3690c0;
+    fill: #3690c0;
+}
+[metric="airquality_raw"] .q6 {
+    background-color: #02818a;
+    fill: #02818a;
+}
+[metric="airquality_raw"] .q7 {
+    background-color: #016c59;
+    fill: #016c59;
+}
+[metric="airquality_raw"] .q8 {
+    background-color: #014636;
+    fill: #014636;
+}
+
+
 [metric="dust"] .q1 {
     background-color: #fff7bc;
     fill: #fff7bc;

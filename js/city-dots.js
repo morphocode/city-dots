@@ -105,6 +105,21 @@ var citydots = {};
                     "q6": "Direct sunlight"
                 }
             },
+            'airquality_raw': {
+                legend: [15, 20, 25, 30, 35, 40],
+                itemName: ['mV', 'mV'],
+                legendTitle: 'Dust',
+                legendDescription: {
+                    'q1': '&lt; 15 mV',
+                    'q2': '15 — 20 mV',
+                    'q3': '20 — 25 mV',
+                    'q4': '25 — 30 mV',
+                    'q5': '30 — 35 mV',
+                    'q6': '35 — 40 mV',
+                    //'q7': '40 — 45 mV',
+                    'q7': '&gt; 40 mV'
+                }
+            },
             'sound': {
                 legend: [1200.0, 1350.0, 1500.0, 1650.0, 1800.0],
                 itemName: ["mV", "mV"],
@@ -146,10 +161,10 @@ var citydots = {};
     function bootstrap() {
 
         currentCity('all');
-        currentMetric('dust');
+        currentMetric('airquality_raw');
         currentDate(2015, 2);
         currentVizType('all-cities');
-        initCalendars('dust', 2015, 2);
+        initCalendars('airquality_raw', 2015, 2);
 
         // handle changes in the metrics
         $(".metrics li").click(function(event) {
