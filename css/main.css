@@ -50,7 +50,7 @@ a:hover, a:focus {
 .mp-menu h2 {
     border-bottom: 1px solid rgba(153,153,153,0.2);
     color: #ccc;
-    font-size: 1em;
+    padding: 20px 15px;
 }
 
 .mp-menu ul li > a {
@@ -59,6 +59,10 @@ a:hover, a:focus {
 .mp-menu ul li::before {
     color: rgba(255, 255, 255, 0.3);
     line-height: 2.7;
+}
+
+.mp-back {
+    padding: 1em 15px;
 }
 
 .mp-back::after {
@@ -94,7 +98,6 @@ a:hover, a:focus {
 }
 
 .legend .title {
-    background: #333;
     color: #ccc;
     padding: 10px 10px;
     border-bottom: 1px solid rgba(153,153,153,0.2);
