@@ -63,12 +63,27 @@ var citydots = {};
 
         // Settings for each of the Metrics: legend, unit type, color scale
         metrics = {
+            'dust': {
+                legend: [700, 1100, 1500, 1900, 2300, 2700, 3100],
+                itemName: ['pcs/liter', 'pcs/liter'],
+                legendTitle: 'Dust',
+                legendDescription: {
+                    'q1': '&lt; 700 pcs/liter',
+                    'q2': '700 — 1100 pcs/liter',
+                    'q3': '1100 — 1500 pcs/liter',
+                    'q4': '1500 — 1900 pcs/liter',
+                    'q5': '1900 — 2300 pcs/liter',
+                    'q6': '2300 — 2700 pcs/liter',
+                    'q7': '2700 — 3100 pcs/liter',
+                    'q8': '&gt; 3100 pcs/liter'
+                }
+            },
             'humidity': {
                 legend: [20.0, 30.0, 40.0, 50.0, 60.0, 70.0],
                 itemName: ['%', '%'],
                 legendTitle: 'Humidity',
                 legendDescription: {
-                    "q1": "&lt; 20 %",
+                    'q1': '&lt; 20 %',
                     "q2": "20 % — 30 %",
                     "q3": "30 % — 40 %",
                     "q4": "40 % — 50 %",
@@ -131,10 +146,10 @@ var citydots = {};
     function bootstrap() {
 
         currentCity('all');
-        currentMetric('sound');
+        currentMetric('dust');
         currentDate(2015, 2);
         currentVizType('all-cities');
-        initCalendars('sound', 2015, 2);
+        initCalendars('dust', 2015, 2);
 
         $(".metrics li").click(function(event) {
             var thisMetric = $(this).data('metric');
