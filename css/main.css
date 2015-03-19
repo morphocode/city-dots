@@ -75,6 +75,12 @@ a:hover, a:focus {
     padding: 0 15px;
 }
 
+.menu-about h3 {
+    padding: 0 15px;
+    font-size: 1em;
+    color: #ccc;
+}
+
 
 /** Legend --------------------------------------------------------- */
 .legend {
