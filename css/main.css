@@ -80,9 +80,14 @@ a:hover, a:focus {
 }
 
 .menu-about h3 {
+    text-transform: uppercase;
     padding: 0 15px;
-    font-size: 1em;
+    font-size: 0.8em;
     color: #ccc;
+}
+
+.menu-about .mp-level {
+    cursor: default;
 }
 
 
