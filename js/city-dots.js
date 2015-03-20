@@ -84,12 +84,12 @@ var citydots = {};
                 legendTitle: 'Humidity',
                 legendDescription: {
                     'q1': '&lt; 20 %',
-                    "q2": "20 % — 30 %",
-                    "q3": "30 % — 40 %",
-                    "q4": "40 % — 50 %",
-                    "q5": "50 % — 60 %",
-                    "q6": "60 % — 70 %",
-                    "q7": "&gt; 70 %"
+                    'q2': '20 % — 30 %',
+                    'q3': '30 % — 40 %',
+                    'q4': '40 % — 50 %',
+                    'q5': '50 % — 60 %',
+                    'q6': '60 % — 70 %',
+                    'q7': '&gt; 70 %'
                 }
             },
             'light': {
@@ -108,7 +108,7 @@ var citydots = {};
             'airquality_raw': {
                 legend: [15, 20, 25, 30, 35, 40],
                 itemName: ['mV', 'mV'],
-                legendTitle: 'Dust',
+                legendTitle: 'Pollution',
                 legendDescription: {
                     'q1': '&lt; 15 mV',
                     'q2': '15 — 20 mV',
@@ -161,10 +161,10 @@ var citydots = {};
     function bootstrap() {
 
         currentCity('all');
-        currentMetric('airquality_raw');
+        currentMetric('temperature');
         currentDate(2015, 2);
         currentVizType('all-cities');
-        initCalendars('airquality_raw', 2015, 2);
+        initCalendars('temperature', 2015, 2);
 
         // handle changes in the metrics
         $(".metrics li").click(function(event) {
@@ -240,8 +240,7 @@ var citydots = {};
         }
 
         // updates the legend
-        $('.tab-metric-scale .title').html(metrics[metric].legendTitle + ' Scale');
-        $('ul.legend-colors').replaceWith(buildLegend(metric));
+        updateLegend(metric);
 
     }
 
@@ -314,9 +313,12 @@ var citydots = {};
     }
 
     /**
-     *  Build the colors legend for the current metric
+     *  Updates the legend to match the specified metric
+     * Set the colors and the title
      */
-    function buildLegend(metric) {
+    function updateLegend(metric) {
+        $('.tab-legend .title').html(metrics[metric].legendTitle);
+
         var legendHtml = '<ul class="legend-colors" metric="' + metric + '">',
             myMetricLegend = metrics[metric].legendDescription;
 
@@ -327,7 +329,9 @@ var citydots = {};
         }
 
         legendHtml += '</ul>';
-        return legendHtml;
+
+        // replace the current colors
+        $('ul.legend-colors').replaceWith(legendHtml);
     }
 
     // January

@@ -101,9 +101,9 @@ a:hover, a:focus {
     color: #ccc;
     padding: 10px 10px;
     border-bottom: 1px solid rgba(153,153,153,0.2);
-    text-transform: uppercase;
+    /*text-transform: uppercase;
     font-size: 10px;
-    font-weight: bold;
+    font-weight: bold;*/
 }
 
 .legend ul li {
@@ -159,7 +159,16 @@ a:hover, a:focus {
     table.small-multiples th:nth-child(3) {display: none;}
 }
 
-.ch-tooltip {
+td.cal-wrapper:first-child .ch-tooltip {
+    margin-left: 30px;
+}
+
+td.cal-wrapper:first-child .ch-tooltip::after {
+    left: 17px;
+    margin-left: 17px;
+}
+
+td.cal-wrapper:not(:first-child) .ch-tooltip {
     white-space: nowrap;
     width: auto;
 }
