@@ -190,6 +190,8 @@ var citydots = {};
 
             updateCalendars();
         });
+
+        $('table').stickyTableHeaders();
     }
 
 

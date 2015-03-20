@@ -31,6 +31,10 @@ a:hover, a:focus {
     margin: 0;
 }
 
+.navbar .share-icons {
+    float: right;
+}
+
 
 /** Multi layer push menu ------------------------------------ */
 
