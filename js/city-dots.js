@@ -453,6 +453,7 @@ var citydots = {};
     function currentVizType(vizType) {
         if (arguments.length) {
             $('.menu-viz-types').attr('data-viz-type', vizType);
+            $('.mp-menu').attr('data-viz-type', vizType);
         } else {
             return  $('.menu-viz-types').attr('data-viz-type');
         }

@@ -78,6 +78,14 @@ a:hover, a:focus {
     cursor: default;
 }
 
+/** hide/show the time options depending on whether it's a single month or period selection */
+[data-viz-type=all-cities] .menu-time-period {
+    display: none;
+}
+
+[data-viz-type=single-city] .menu-dates {
+    display: none;
+}
 
 /** Legend --------------------------------------------------------- */
 .legend {
