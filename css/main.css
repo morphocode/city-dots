@@ -94,6 +94,13 @@ a:hover, a:focus {
     width: 100%;
 }
 
+/** hide the legend if there's no space */
+@media only screen and (max-height: 650px) {
+    .legend {
+        display: none;
+    }
+}
+
 .legend .tab-metric-scale .title {
     display: none;
 }
@@ -164,6 +171,7 @@ a:hover, a:focus {
     border-bottom: 1px solid #ccc;
     display: inline-block;
 }
+
 
 @media only screen and (max-width: 1500px) {
     .navbar .follow-icons {
