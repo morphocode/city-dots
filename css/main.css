@@ -127,9 +127,6 @@ a:hover, a:focus {
 
 /** Small multiples -------------------------------------------------------------------- */
 .navbar {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-left: 0;
     height: 40px;
     min-height: 40px;
     margin: 0;
@@ -137,13 +134,16 @@ a:hover, a:focus {
     width: 100%;
 }
 
-.navbar .share-icons {
+.navbar .follow-icons {
     float: right;
+    padding-top: 7px;
     margin-right: 250px;
 }
 
 .small-multiples-header {
+    background-color: white;
     border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ddd;
     float: left;
     list-style-type: none;
     margin: 0;
@@ -158,7 +158,7 @@ a:hover, a:focus {
 }
 
 @media only screen and (max-width: 1500px) {
-    .navbar .share-icons {
+    .navbar .follow-icons {
         display: none;
     }
 }
@@ -247,12 +247,32 @@ a:hover, a:focus {
     font-weight: 400;
 }
 
-.logo-bottom {
+.small-multiples-footer {
     background-color: white;
     border-top: 1px solid #eee;
     clear: both;
     padding: 20px;
     text-align: center;
+}
+
+.social-icons {
+    font-size: 8px;
+}
+
+.social-icons a {
+    color: #ccc;
+}
+
+.social-icons a:hover {
+    color: #999;
+}
+
+.divider {
+    border-top: 4px solid #ddd;
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    margin: 20px;
 }
 
 .logo-bottom h3 {
@@ -265,7 +285,7 @@ a:hover, a:focus {
 }
 
 .logo-bottom img {
-    width: 150px;
+    width: 120px;
     opacity: 0.5;
 }
 
