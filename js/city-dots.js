@@ -204,6 +204,7 @@ var citydots = {};
 
         // hide calendars
         $('.cal-wrapper').toggleClass('has-data', false);
+        $('.cal-header').toggleClass('has-data', false);
 
         switch (vizType) {
             case 'all-cities':
@@ -261,6 +262,9 @@ var citydots = {};
         var month = month || 2,
             year = year || 2015,
             startDate = moment(year + '-' + month, 'YYYY-M'),
+            cal = calendars[id],
+            calElement = $('.cal-wrapper#'+id),
+            calHeader = $('.cal-header.'+id),
             customSettings = {
                 start: startDate.toDate(),
                 afterLoadData: buildParser(metric),
@@ -273,6 +277,7 @@ var citydots = {};
                     calElement.attr('metric', 'none');
                     calElement.attr('city', 'none');
                     calElement.toggleClass('has-data', true);
+                    calHeader.toggleClass('has-data', true);
                 },
                 onComplete: function() {
                     calElement.attr('metric', metric);
@@ -282,9 +287,8 @@ var citydots = {};
                     $(customSettings.itemSelector).height('');
                     $(customSettings.itemSelector).width('');
                 }
-            },
-            cal = calendars[id],
-            calElement = $('.cal-wrapper#'+id);
+            };
+
 
 
         // use standard settings for base
@@ -308,7 +312,7 @@ var citydots = {};
         calendars[id].init(customSettings);
 
         // update the corresponding DOM element
-        calElement.find('.primary-label').html(cities[city].label);
+        $('.' + id + '.cal-header').html(cities[city].label);
         calElement.find('.secondary-label').html(startDate.format('MMM YYYY'));
     }
 
