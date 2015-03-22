@@ -243,7 +243,11 @@ a:hover, a:focus {
     padding: 25px 25px;
 }
 
-/** fix the tooltip ---- */
+.ch-tooltip {
+    font-weight: 400;
+}
+
+/** fix the position of the tooltip in the first column ---- */
 .cal-wrapper:first-child .ch-tooltip {
     margin-left: 30px;
 }
