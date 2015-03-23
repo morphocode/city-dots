@@ -17,7 +17,7 @@ var citydots = {};
                 label: 'Boston'
             },
             'geneva': {
-                label: 'Geneve'
+                label: 'Geneva'
             },
             'rio': {
                 label: 'Rio de Janeiro'
