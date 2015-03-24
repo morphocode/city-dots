@@ -162,9 +162,9 @@ var citydots = {};
 
         currentCity('all');
         currentMetric('temperature');
-        currentDate(2015, 2);
+        currentDate(2015, 3);
         currentVizType('all-cities');
-        initCalendars('temperature', 2015, 2);
+        initCalendars('temperature', 2015, 3);
 
         // handle changes in the metrics
         $(".metrics li").click(function(event) {
